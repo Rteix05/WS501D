@@ -21,6 +21,8 @@ Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners (page �
 (La piste D, pixel art, a été abandonnée le 19/10/2026.)
 
 ## Déclinaisons de la piste B (favorite)
+
+> **Statut (19/10/2026) : B4 « Comics 2D — aplats et trames » est la variante favorite de l'équipe.** C'est elle qui sert de base à la suite de la DA, mais les détails restent à affiner.
 Ce qui ne change pas : contours épais, aplats saturés, tags et onomatopées, personnages à la silhouette forte. Le jeu étant en **2D vue de côté**, **Lethal League Blaze** sert de référence pour passer ce style en 2D arcade.
 
 | Variante | Ambiance | Références | Palette |
