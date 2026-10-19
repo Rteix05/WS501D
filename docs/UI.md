@@ -2,7 +2,7 @@
 
 Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners, page **« Maquettes UI — B4 »**
 
-> **Statut :** premières maquettes du 19/10/2026, à itérer. Le titre du jeu (« NOM DU JEU ») et les persos (« Runner ») sont des **placeholders**.
+> **Statut :** premières maquettes du 19/10/2026, à itérer. Le jeu s'appelle **OUT!** (écran titre à jour). Les persos (« Runner ») sont des **placeholders**.
 
 ## Bases visuelles
 - **Palette B4 :** jaune `#FFE600` (fond), rouge `#E63946`, noir `#111111`, blanc `#F5F5F5`, bleu `#3A86FF`.
@@ -42,6 +42,5 @@ Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners, page *
 
 ## Points à valider
 - Le nombre de boutons de la borne : la sélection affiche « APPUIE SUR A » pour l'instant.
-- Le titre du jeu.
 - Le design des persos.
 - La lisibilité du HUD sur l'écran réel de la borne (distance de lecture).

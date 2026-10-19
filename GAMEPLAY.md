@@ -1,5 +1,6 @@
-# Gameplay — référence : SpeedRunners
+# OUT! — Gameplay (référence : SpeedRunners)
 
+> **Nom du jeu : OUT!** (choisi le 19/10/2026, d'après l'onomatopée de l'élimination quand on sort de l'écran).
 > Décision : on reprend le gameplay de **SpeedRunners** (DoubleDutch Games / tinyBuild, 2013).
 > L'univers graphique sera défini séparément (voir moodboard Figma).
 

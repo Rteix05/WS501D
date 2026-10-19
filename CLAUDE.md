@@ -11,6 +11,7 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 | `docs/UI.md` | Maquettes d'interface B4 : écrans, HUD, couleurs joueurs, typos |
 
 ## Décisions prises
+- **Nom du jeu : OUT!** (l'onomatopée de l'élimination). Le logo est en Bangers, blanc avec contour noir et ombre rouge, sur l'écran titre du Figma.
 - **Gameplay : on reprend SpeedRunners.** Course de 2 à 4 joueurs en écran partagé. La caméra suit le leader, celui qui sort de l'écran est éliminé, l'écran rétrécit. Grappin, glissade, boost, objets. Match en 3 manches gagnantes.
 - **Objets (V1) : caisses, grappin doré, bouclier** (le bouclier est un objet nouveau qui absorbe 1 coup). Voir `GAMEPLAY.md`.
 - **Moteur : Unity** (imposé), sortie WebGL + borne.

@@ -1,4 +1,4 @@
-# WS501D — Jeu d'arcade façon SpeedRunners
+# OUT! — Jeu d'arcade façon SpeedRunners (WS501D)
 
 SAÉ WS501D (MMI Troyes, 2026) : un jeu de course multijoueur en écran partagé sous Unity, pour la borne d'arcade MMI et le web, relié à un site de réglages et de scores.
 
