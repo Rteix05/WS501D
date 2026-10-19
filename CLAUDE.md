@@ -13,8 +13,10 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 - **Gameplay : on reprend SpeedRunners.** Course de 2 à 4 joueurs en écran partagé. La caméra suit le leader, celui qui sort de l'écran est éliminé, l'écran rétrécit. Grappin, glissade, boost, objets. Match en 3 manches gagnantes.
 - **Moteur : Unity** (imposé), sortie WebGL + borne.
 
+- **Univers graphique : la piste B (street / graffiti cel-shading, réf. Jet Set Radio et Hi-Fi RUSH) est la favorite**, mais elle n'est pas figée. L'équipe va en modifier des détails. Base-toi sur B sans présenter ses détails (palette, références) comme définitifs.
+
 ## Pas encore décidé
-- **L'univers graphique.** 4 pistes sont dans `docs/MOODBOARD.md` et sur le Figma. **N'en choisis pas une à la place de l'équipe.**
+- **Les ajustements de la piste B.** Ne les décide pas à la place de l'équipe.
 - La plateforme (tirage au sort en semaine 2). Le jeu convient à la borne classique à 2 joueurs ou à la télé du hall avec des téléphones (4 joueurs), pas à la table cocktail.
 - Le nombre de boutons de la borne MMI.
 - La stack du site (back-end, BDD, API jeu ↔ site).

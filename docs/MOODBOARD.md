@@ -2,7 +2,7 @@
 
 Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners (page « Moodboard »)
 
-> **Statut : l'univers graphique n'est PAS encore choisi.** Les 4 pistes ci-dessous sont à départager en équipe.
+> **Statut (19/10/2026) : la piste B (street / graffiti cel-shading) est la favorite de l'équipe.** Elle n'est pas figée : des détails vont encore changer. Les pistes A, C et D restent comme références.
 
 ## Contraintes, quel que soit le style
 - Rester lisible à haute vitesse.
