@@ -1,5 +1,7 @@
 # Moodboard — direction artistique, musique, juice
 
+> ⏸️ **EXPLORATION EN PAUSE (19/10/2026)** : le thème et la DA ne sont pas choisis.
+
 Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners (page « Moodboard »)
 
 > **Statut (19/10/2026) : la piste B (street / graffiti cel-shading) est la favorite de l'équipe.** Elle n'est pas figée : des détails vont encore changer. Les pistes A et C restent comme références.

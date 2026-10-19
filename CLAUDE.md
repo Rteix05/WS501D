@@ -6,22 +6,25 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 | Fichier | Contenu |
 |---|---|
 | `docs/CONSIGNES.md` | Consignes officielles de la SAÉ : livrables, plateformes, planning |
-| `GAMEPLAY.md` | **Gameplay retenu** : reprise de SpeedRunners (mécaniques, objets, ordre de développement) |
-| `docs/MOODBOARD.md` | Pistes de direction artistique, musique, sound design, juice |
-| `docs/UI.md` | Maquettes d'interface B4 : écrans, HUD, couleurs joueurs, typos |
+| `docs/BORNE.md` | **Cahier des charges de la borne Anatidae** : contraintes, Toolkit Unity, API, exercices |
+| `GAMEPLAY.md` | *(exploration en pause)* reprise de SpeedRunners |
+| `docs/MOODBOARD.md` | *(exploration en pause)* pistes de DA, musique, sound design, juice |
+| `docs/UI.md` | *(exploration en pause)* maquettes d'interface B4 |
 
-## Décisions prises
-- **Nom du jeu : OUT!** (l'onomatopée de l'élimination). Le logo est en Bangers, blanc avec contour noir et ombre rouge, sur l'écran titre du Figma.
-- **Gameplay : on reprend SpeedRunners.** Course de 2 à 4 joueurs en écran partagé. La caméra suit le leader, celui qui sort de l'écran est éliminé, l'écran rétrécit. Grappin, glissade, boost, objets. Match en 3 manches gagnantes.
-- **Objets (V1) : caisses, grappin doré, bouclier** (le bouclier est un objet nouveau qui absorbe 1 coup). Voir `GAMEPLAY.md`.
-- **Moteur : Unity** (imposé), sortie WebGL + borne.
+## État actuel (19/10/2026)
+- **Le thème et la DA ne sont PAS choisis.** Le gameplay SpeedRunners, le nom « OUT! », le moodboard et les maquettes B4 sont une **exploration mise en pause**. Ne t'en sers pas comme décisions.
+- **Pour l'instant, on suit le cours imposé** : installer la borne Anatidae en local, prendre en main l'Anatidae Toolkit, faire un mini-jeu de cube puis un squelette de jeu. Voir `docs/BORNE.md`.
+- L'équipe donnera plus tard son thème et sa DA. Mets alors ces fichiers à jour.
 
-- **Univers graphique : la piste B (street / graffiti cel-shading, réf. Jet Set Radio et Hi-Fi RUSH) est la favorite**, mais elle n'est pas figée. Parmi ses 4 déclinaisons, **B4 « Comics 2D — aplats et trames » est la favorite** (réf. Lethal League Blaze, Spider-Verse, Hi-Fi RUSH : 2 ou 3 couleurs par écran, ombres en aplats noirs, trames, cases de BD), voir `docs/MOODBOARD.md`. La piste D (pixel art) est abandonnée. Sunset Overdrive est une inspiration pour l'univers et pour le déplacement. Base-toi sur B sans présenter ses détails (palette, références) comme définitifs.
+## Contraintes fixes (consignes)
+- **Moteur : Unity** (imposé), sortie WebGL en 1920×1080, sur la borne Anatidae.
+- **Le jeu se joue seul ou à deux, avec 1 à 3 boutons maximum.** C'est incompatible avec l'exploration SpeedRunners (4 joueurs, 4 boutons), qu'il faudra adapter si on la reprend.
+- Score enregistré sur la borne avec un nom de 3 caractères, puis envoyé au site du jeu. Le site a un back-office pour régler la difficulté.
+- Retour au menu avec le bouton blanc, et au bout de 60 s d'inactivité. Dead zone sur les joysticks.
 
 ## Pas encore décidé
-- **Les ajustements de la piste B.** Ne les décide pas à la place de l'équipe.
-- La plateforme (tirage au sort en semaine 2). Le jeu convient à la borne classique à 2 joueurs ou à la télé du hall avec des téléphones (4 joueurs), pas à la table cocktail.
-- Le nombre de boutons de la borne MMI.
+- **Le thème, la DA et le gameplay.**
+- La plateforme (tirage au sort en semaine 2).
 - La stack du site (back-end, BDD, API jeu ↔ site).
 
 ## Liens

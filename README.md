@@ -1,9 +1,11 @@
-# OUT! — Jeu d'arcade façon SpeedRunners (WS501D)
+# Jeu d'arcade — SAÉ WS501D
 
-SAÉ WS501D (MMI Troyes, 2026) : un jeu de course multijoueur en écran partagé sous Unity, pour la borne d'arcade MMI et le web, relié à un site de réglages et de scores.
+SAÉ WS501D (MMI Troyes, 2026) : un jeu d'arcade sous Unity pour la borne MMI (Anatidae) et le web, relié à un site de réglages et de scores. **Le thème et la DA ne sont pas encore choisis.**
+
+- [Cahier des charges de la borne Anatidae](docs/BORNE.md)
 
 - [Consignes de la SAÉ](docs/CONSIGNES.md)
-- [Gameplay retenu](GAMEPLAY.md)
+- [Exploration gameplay SpeedRunners (en pause)](GAMEPLAY.md)
 - [Moodboard : DA, musique, juice](docs/MOODBOARD.md)
 - [Figma](https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners)
 

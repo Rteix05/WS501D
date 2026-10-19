@@ -1,5 +1,7 @@
 # Maquettes d'interface — style B4 (comics 2D)
 
+> ⏸️ **EXPLORATION EN PAUSE (19/10/2026)** : le thème et la DA ne sont pas choisis.
+
 Figma : https://www.figma.com/design/3rvjvBiZXKNO3VvmX1LoER/SpeedRunners, page **« Maquettes UI — B4 »**
 
 > **Statut :** premières maquettes du 19/10/2026, à itérer. Le jeu s'appelle **OUT!** (écran titre à jour). Les persos (« Runner ») sont des **placeholders**.
