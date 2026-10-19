@@ -17,7 +17,7 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 - L'équipe donnera plus tard son thème et sa DA. Mets alors ces fichiers à jour.
 
 ## Contraintes fixes (consignes)
-- **Moteur : Unity** (imposé), sortie WebGL en 1920×1080, sur la borne Anatidae.
+- **Moteur : Unity 6000.0.40f1** (imposé, c'est la version de l'Anatidae Toolkit ; tout le groupe doit avoir la même), avec le module WebGL. Sortie WebGL en 1920×1080, sur la borne Anatidae.
 - **Le jeu se joue seul ou à deux, avec 1 à 3 boutons maximum.** C'est incompatible avec l'exploration SpeedRunners (4 joueurs, 4 boutons), qu'il faudra adapter si on la reprend.
 - Score enregistré sur la borne avec un nom de 3 caractères, puis envoyé au site du jeu. Le site a un back-office pour régler la difficulté.
 - Retour au menu avec le bouton blanc, et au bout de 60 s d'inactivité. Dead zone sur les joysticks.

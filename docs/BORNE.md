@@ -41,7 +41,7 @@ La borne fait tourner **Anatidae**, une interface qui lance des jeux WebGL. Notr
 `scoreType` prend la valeur `"score"`, `"time"` ou `"distance"`. `scoreSort` prend `"asc"` ou `"desc"`.
 
 ## Anatidae Toolkit (Unity)
-- Le projet est en **Unity 6000.0.40f1**. Il s'ouvre aussi avec une version 6000.x plus récente, et il faut le **module WebGL**.
+- **Version Unity du groupe : 6000.0.40f1**, la même que le Toolkit, avec le module WebGL. Installation : `unityhub://6000.0.40f1/157d81624ddf`. Ne pas ouvrir le projet dans une autre version : Unity le convertit sans retour possible.
 - Il utilise l'**ancien Input Manager** :
   - axes `P1_Horizontal`, `P1_Vertical`, `P2_Horizontal`, `P2_Vertical` ;
   - boutons `P1_Start`, `P1_B1` à `P1_B6`, `P2_Start`, `P2_B1` à `P2_B6`, `Coin` ;
