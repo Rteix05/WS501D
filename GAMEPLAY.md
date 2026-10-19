@@ -44,6 +44,13 @@ En haut de l'écran, un cadre par joueur : portrait, objet tenu, jauge de boost.
 - **Réglages à distance depuis le site :** vitesse du rétrécissement, nombre de manches, objets activés, circuit.
 - **Juice :** traînées de vitesse, secousses d'écran, ralenti à l'élimination, particules au boost et au grappin, sons.
 
+## Pistes d'ajout inspirées de Sunset Overdrive (NON décidées)
+Idées de mobilité à tester une fois la base jouable, **sans remplacer le cœur SpeedRunners** :
+- **Grind sur rails / câbles** : on glisse vite sur une ligne, avec une alternative ou un bonus au grappin.
+- **Course sur les murs**, sur une courte distance.
+- **Rebonds sur les objets du décor** (voitures, auvents) : trampolines intégrés au décor.
+- **Jauge de style** : enchaîner les mouvements sans toucher le sol remplit le boost plus vite.
+
 ## Ordre de développement
 1. **Base jouable :** Unity 2D, 1 circuit, 2 joueurs, course + saut + grappin + glissade + boost, caméra sur le leader, élimination, écran qui rétrécit, 3 manches gagnantes.
 2. 3 ou 4 objets (par ex. missile, caisses, rayon gel, onde de choc), puis les autres si on a le temps.

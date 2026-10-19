@@ -13,7 +13,7 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 - **Gameplay : on reprend SpeedRunners.** Course de 2 à 4 joueurs en écran partagé. La caméra suit le leader, celui qui sort de l'écran est éliminé, l'écran rétrécit. Grappin, glissade, boost, objets. Match en 3 manches gagnantes.
 - **Moteur : Unity** (imposé), sortie WebGL + borne.
 
-- **Univers graphique : la piste B (street / graffiti cel-shading, réf. Jet Set Radio et Hi-Fi RUSH) est la favorite**, mais elle n'est pas figée. L'équipe va en modifier des détails. Base-toi sur B sans présenter ses détails (palette, références) comme définitifs.
+- **Univers graphique : la piste B (street / graffiti cel-shading, réf. Jet Set Radio et Hi-Fi RUSH) est la favorite**, mais elle n'est pas figée. 4 déclinaisons (B1 à B4) sont à départager dans `docs/MOODBOARD.md`. La piste D (pixel art) est abandonnée. Sunset Overdrive est une inspiration pour l'univers et pour le déplacement. Base-toi sur B sans présenter ses détails (palette, références) comme définitifs.
 
 ## Pas encore décidé
 - **Les ajustements de la piste B.** Ne les décide pas à la place de l'équipe.
