@@ -22,7 +22,18 @@
 - **Pics**
 - Pentes à prendre en glissade
 
-## Objets (boîtes rouges sur le parcours, 1 objet tenu à la fois)
+## Objets retenus pour l'instant (décision du 19/10/2026)
+On en garde **3** pour la première version :
+
+| Objet | Effet | Parade |
+|---|---|---|
+| **Caisses (box)** | Pose 1 ou 3 caisses derrière soi, qui ralentissent et étourdissent | Glisser ou sauter par-dessus. Le bouclier les absorbe |
+| **Grappin doré** | Attrape l'adversaire devant soi et échange sa place avec lui | Glisser dessous. Le bouclier le bloque |
+| **Bouclier** *(objet nouveau, absent de SpeedRunners)* | Bulle qui absorbe **1 coup** (caisse, grappin doré) puis éclate. Proposition : durée max 6 s | — |
+
+Les valeurs (nombre de caisses, durée du bouclier) sont à ajuster en playtest. Le tableau ci-dessous reste comme référence de ce qui existe dans le jeu original.
+
+## Objets de SpeedRunners (référence, boîtes rouges sur le parcours, 1 objet tenu à la fois)
 | Objet | Effet | Parade |
 |---|---|---|
 | Grappin doré | Attrape l'adversaire devant soi et échange sa place avec lui | Glisser dessous, caisses, onde de choc |
