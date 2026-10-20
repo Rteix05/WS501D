@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFE600">
+<title>OUT! — Manette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFE600; --red: #E63946; --black: #111111; --white: #F5F5F5; --blue: #3A86FF;
+    --me: #111111;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; touch-action: none; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--yellow); color: var(--black); font-family: 'Archivo Black', system-ui, sans-serif; }
+  body {
+    background-color: var(--yellow);
+    background-image: radial-gradient(var(--red) 22%, transparent 24%);
+    background-size: 22px 22px;
+    background-position: 0 0;
+  }
+  .bangers { font-family: 'Bangers', 'Impact', sans-serif; letter-spacing: .02em; }
+  .screen { position: fixed; inset: 0; display: none; }
+  .screen.on { display: flex; }
+
+  /* Cases BD */
+  .panel { background: var(--white); border: 5px solid var(--black); box-shadow: 9px 9px 0 var(--black); }
+
+  /* Écran pseudo */
+  #join { align-items: center; justify-content: center; padding: 16px; }
+  #join .panel { padding: 20px 24px; width: min(440px, 100%); text-align: center; transform: rotate(-1.5deg); }
+  .logo { font-size: 84px; line-height: .9; color: var(--white); -webkit-text-stroke: 3px var(--black); text-shadow: 5px 5px 0 var(--red), 9px 9px 0 var(--black); margin: 0 0 6px; }
+  #join p { margin: 6px 0 14px; font-size: 14px; }
+  #name { width: 100%; font: 56px 'Bangers', Impact, sans-serif; text-align: center; letter-spacing: .3em; text-transform: uppercase;
+          border: 5px solid var(--black); background: var(--yellow); padding: 4px 0 0 .3em; outline: none; touch-action: auto; user-select: text; -webkit-user-select: text; }
+  .btn { margin-top: 16px; width: 100%; font: 40px 'Bangers', Impact, sans-serif; color: var(--white); background: var(--red); border: 5px solid var(--black);
+         box-shadow: 7px 7px 0 var(--black); padding: 6px 0 2px; cursor: pointer; }
+  .btn:active { transform: translate(4px, 4px); box-shadow: 3px 3px 0 var(--black); }
+  .err { color: var(--red); min-height: 1.2em; font-size: 14px; margin-top: 10px; }
+
+  /* Manette */
+  #pad { flex-direction: column; }
+  #top { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+  #tag { font-size: 34px; padding: 4px 14px 0; background: var(--me); color: var(--white); border: 4px solid var(--black); box-shadow: 5px 5px 0 var(--black); transform: rotate(-2deg); }
+  #status { font-size: 13px; background: var(--black); color: var(--yellow); padding: 6px 10px; }
+  #zones { flex: 1; display: flex; }
+  #stickZone { flex: 1; position: relative; }
+  #stickHint { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 26px; opacity: .55; text-align: center; pointer-events: none; }
+  #base, #knob { position: absolute; border-radius: 50%; pointer-events: none; display: none; }
+  #base { width: 150px; height: 150px; margin: -75px 0 0 -75px; border: 5px solid var(--black); background: rgba(245,245,245,.6); }
+  #knob { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: var(--me); border: 5px solid var(--black); box-shadow: 4px 4px 0 var(--black); }
+  #buttons { flex: 1; position: relative; }
+  .b { position: absolute; border-radius: 50%; border: 6px solid var(--black); box-shadow: 8px 8px 0 var(--black); display: flex; align-items: center; justify-content: center;
+       text-align: center; color: var(--white); -webkit-text-stroke: 1.5px var(--black); font-family: 'Bangers', Impact, sans-serif; line-height: .95; }
+  .b.down { transform: translate(5px, 5px); box-shadow: 3px 3px 0 var(--black); filter: brightness(1.15); }
+  #b1 { width: 150px; height: 150px; right: 28px; bottom: 26px; background: var(--red); font-size: 40px; }
+  #b2 { width: 120px; height: 120px; right: 196px; bottom: 34px; background: var(--black); color: var(--yellow); -webkit-text-stroke: 0; font-size: 30px; }
+  #b3 { width: 120px; height: 120px; right: 60px; bottom: 196px; background: var(--blue); font-size: 26px; }
+
+  #rotate { align-items: center; justify-content: center; background: var(--yellow); z-index: 10; text-align: center; font-size: 44px; padding: 20px; }
+  @media (orientation: portrait) { body.playing #rotate { display: flex; } }
+
+  #flash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 5; }
+  #flash span { font-size: 120px; color: var(--white); -webkit-text-stroke: 4px var(--black); text-shadow: 6px 6px 0 var(--red), 11px 11px 0 var(--black); transform: rotate(-6deg) scale(0); transition: transform .15s; }
+  #flash.on span { transform: rotate(-6deg) scale(1); }
+</style>
+</head>
+<body>
+
+<!-- 1. Pseudo -->
+<section id="join" class="screen on">
+  <div class="panel">
+    <h1 class="logo bangers">OUT!</h1>
+    <p>Ton pseudo (3 lettres) pour le tableau des scores</p>
+    <input id="name" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC">
+    <button id="go" class="btn">JE JOUE !</button>
+    <div id="joinErr" class="err"></div>
+  </div>
+</section>
+
+<!-- 2. Manette -->
+<section id="pad" class="screen">
+  <div id="top">
+    <div id="tag" class="bangers">CONNEXION…</div>
+    <div id="status">Appuie sur un bouton pour rejoindre</div>
+  </div>
+  <div id="zones">
+    <div id="stickZone"><div id="stickHint" class="bangers">POSE TON POUCE<br>ICI POUR BOUGER</div><div id="base"></div><div id="knob"></div></div>
+    <div id="buttons">
+      <div id="b3" class="b" data-bit="4">BOOST<br>OBJET</div>
+      <div id="b2" class="b" data-bit="2">GRAP-<br>PIN</div>
+      <div id="b1" class="b" data-bit="1">SAUT</div>
+    </div>
+  </div>
+</section>
+
+<section id="rotate" class="screen bangers">TOURNE TON TÉLÉPHONE<br>EN PAYSAGE ↻</section>
+<div id="flash"><span class="bangers" id="flashText">OUT!</span></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const room = new URLSearchParams(location.search).get('r') || '';
+let ws = null, state = { x: 0, y: 0, b: 0 }, sent = '', lastSend = 0;
+
+// ---------- Pseudo ----------
+try { $('#name').value = localStorage.getItem('out-name') || ''; } catch {}
+$('#name').addEventListener('input', e => e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 3));
+$('#go').addEventListener('click', start);
+if (!room) $('#joinErr').textContent = 'Pas de code de partie : scanne le QR code affiché sur l\'écran du jeu.';
+
+function start() {
+  const name = ($('#name').value || '').padEnd(3, '_');
+  try { localStorage.setItem('out-name', $('#name').value); } catch {}
+  // plein écran + paysage quand le navigateur le permet (Android)
+  const el = document.documentElement;
+  (el.requestFullscreen ? el.requestFullscreen() : Promise.resolve()).then(() => screen.orientation?.lock?.('landscape')).catch(() => {});
+  connect(name);
+}
+
+// ---------- Connexion ----------
+function connect(name) {
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+  ws = new WebSocket(`${proto}://${location.host}/ws?role=phone&r=${encodeURIComponent(room)}&name=${encodeURIComponent(name)}`);
+  ws.onopen = () => { show('pad'); document.body.classList.add('playing'); };
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.t === 'slot') setSlot(m);
+    else if (m.t === 'buzz') { navigator.vibrate?.(m.ms || 200); if (m.text) flash(m.text); }
+    else if (m.t === 'msg') $('#status').textContent = m.text;
+    else if (m.t === 'error') fail(m.msg);
+  };
+  ws.onclose = () => { if ($('#pad').classList.contains('on')) fail('Connexion perdue. Rescanne le QR code ou recharge la page.'); };
+  ws.onerror = () => fail('Impossible de joindre le jeu. Es-tu sur le même Wi-Fi ?');
+}
+
+function fail(msg) {
+  document.body.classList.remove('playing');
+  show('join');
+  $('#joinErr').textContent = msg;
+}
+
+function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); }
+
+function setSlot(m) {
+  if (m.player > 0) {
+    document.documentElement.style.setProperty('--me', m.color);
+    $('#tag').textContent = 'JOUEUR ' + m.player;
+    $('#status').textContent = m.text || 'Prêt !';
+    navigator.vibrate?.(60);
+  } else {
+    document.documentElement.style.setProperty('--me', '#111111');
+    $('#tag').textContent = 'EN ATTENTE';
+    $('#status').textContent = m.text || 'Appuie sur un bouton pour rejoindre';
+  }
+}
+
+function flash(text) {
+  $('#flashText').textContent = text;
+  $('#flash').classList.add('on');
+  setTimeout(() => $('#flash').classList.remove('on'), 900);
+}
+
+// ---------- Boutons ----------
+document.querySelectorAll('.b').forEach(btn => {
+  const bit = +btn.dataset.bit;
+  const down = e => { e.preventDefault(); btn.setPointerCapture?.(e.pointerId); btn.classList.add('down'); state.b |= bit; push(true); };
+  const up = e => { e.preventDefault(); btn.classList.remove('down'); state.b &= ~bit; push(true); };
+  btn.addEventListener('pointerdown', down);
+  btn.addEventListener('pointerup', up);
+  btn.addEventListener('pointercancel', up);
+  btn.addEventListener('lostpointercapture', up);
+});
+
+// ---------- Joystick flottant ----------
+const zone = $('#stickZone'), base = $('#base'), knob = $('#knob');
+let stickId = null, cx = 0, cy = 0;
+const R = 60;
+zone.addEventListener('pointerdown', e => {
+  if (stickId !== null) return;
+  stickId = e.pointerId; zone.setPointerCapture?.(e.pointerId);
+  const r = zone.getBoundingClientRect();
+  cx = e.clientX - r.left; cy = e.clientY - r.top;
+  base.style.left = knob.style.left = cx + 'px';
+  base.style.top = knob.style.top = cy + 'px';
+  base.style.display = knob.style.display = 'block';
+  $('#stickHint').style.display = 'none';
+});
+zone.addEventListener('pointermove', e => {
+  if (e.pointerId !== stickId) return;
+  const r = zone.getBoundingClientRect();
+  let dx = e.clientX - r.left - cx, dy = e.clientY - r.top - cy;
+  const d = Math.hypot(dx, dy);
+  if (d > R) { dx *= R / d; dy *= R / d; }
+  knob.style.left = cx + dx + 'px'; knob.style.top = cy + dy + 'px';
+  // zone morte de 20 % : même règle que les joysticks de la borne
+  const nx = dx / R, ny = -dy / R;
+  state.x = Math.abs(nx) < .2 ? 0 : +nx.toFixed(2);
+  state.y = Math.abs(ny) < .2 ? 0 : +ny.toFixed(2);
+  push(false);
+});
+const release = e => {
+  if (e.pointerId !== stickId) return;
+  stickId = null; state.x = state.y = 0;
+  base.style.display = knob.style.display = 'none';
+  push(true);
+};
+zone.addEventListener('pointerup', release);
+zone.addEventListener('pointercancel', release);
+
+// ---------- Envoi (immédiat pour les boutons, max 30 fois/s pour le joystick) ----------
+function push(now) {
+  const msg = JSON.stringify({ t: 'in', ...state });
+  if (msg === sent || !ws || ws.readyState !== 1) return;
+  const t = performance.now();
+  if (!now && t - lastSend < 33) return;
+  ws.send(msg); sent = msg; lastSend = t;
+}
+setInterval(() => push(true), 50);   // rattrape le dernier mouvement du joystick
+setInterval(() => { if (ws?.readyState === 1) ws.send(JSON.stringify({ t: 'in', ...state })); }, 1000);   // garde la connexion vivante
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+</script>
+</body>
+</html>

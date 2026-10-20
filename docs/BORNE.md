@@ -42,6 +42,7 @@ La borne fait tourner **Anatidae**, une interface qui lance des jeux WebGL. Notr
 
 ## Anatidae Toolkit (Unity)
 - **Version Unity du groupe : 6000.0.40f1**, la même que le Toolkit, avec le module WebGL. Installation : `unityhub://6000.0.40f1/157d81624ddf`. Ne pas ouvrir le projet dans une autre version : Unity le convertit sans retour possible.
+- Touches clavier du projet (adaptées à l'AZERTY par `Assets/OUT/Editor/OutKeys.cs`) : J1 = ZQSD + F G H (B1 B2 B3), R T Y (B4 B6), Entrée (Start) ; J2 = flèches + pavé 1 2 3, pavé 0 (Start) ; Échap = bouton blanc.
 - Il utilise l'**ancien Input Manager** :
   - axes `P1_Horizontal`, `P1_Vertical`, `P2_Horizontal`, `P2_Vertical` ;
   - boutons `P1_Start`, `P1_B1` à `P1_B6`, `P2_Start`, `P2_B1` à `P2_B6`, `Coin` ;

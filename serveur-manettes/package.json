@@ -1,0 +1,14 @@
+{
+  "name": "out-serveur-manettes",
+  "version": "1.0.0",
+  "description": "Relais WebSocket entre les manettes téléphone et le jeu OUT! (Unity WebGL)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "qrcode": "1.5.4",
+    "ws": "8.18.0"
+  }
+}

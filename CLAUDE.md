@@ -15,6 +15,16 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
 - **Le thème et la DA ne sont PAS choisis.** Le gameplay SpeedRunners, le nom « OUT! », le moodboard et les maquettes B4 sont une **exploration mise en pause**. Ne t'en sers pas comme décisions.
 - **Pour l'instant, on suit le cours imposé** : installer la borne Anatidae en local, prendre en main l'Anatidae Toolkit, faire un mini-jeu de cube puis un squelette de jeu. Voir `docs/BORNE.md`.
 - L'équipe donnera plus tard son thème et sa DA. Mets alors ces fichiers à jour.
+- **Prototype « OUT! lite » (20/10/2026)** fait pour la fin de l'exercice 2 (squelette), à la demande de l'utilisateur.
+  - Il reprend `GAMEPLAY.md` et la maquette B4.
+  - Il se joue de 1 à 4 joueurs, avec la borne, le clavier ou un téléphone.
+  - Le code est dans le projet Unity local `anatidae-toolkit/Assets/OUT/`, qui n'est pas encore dans ce dépôt. Le serveur des manettes téléphone est dans `serveur-manettes/`.
+  - Commandes (3 boutons, comme l'impose la borne) :
+    - B1 : saut ;
+    - B2 : grappin ;
+    - B3 : boost ou objet ;
+    - bas : glissade.
+  - Touches clavier : J1 = ZQSD + F G H, J2 = flèches + pavé 1 2 3, Échap = bouton blanc.
 
 ## Contraintes fixes (consignes)
 - **Moteur : Unity 6000.0.40f1** (imposé, c'est la version de l'Anatidae Toolkit ; tout le groupe doit avoir la même), avec le module WebGL. Sortie WebGL en 1920×1080, sur la borne Anatidae.
