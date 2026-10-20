@@ -25,6 +25,12 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
     - B3 : boost ou objet ;
     - bas : glissade.
   - Touches clavier : J1 = ZQSD + F G H, J2 = flèches + pavé 1 2 3, Échap = bouton blanc.
+  - **Circuit** : c'est une reprise exacte de la page « Map » du Figma, une capture d'un circuit SpeedRunners en boucle qui tourne dans le sens horaire, avec notre style B4.
+    - Les données sont générées par `Assets/OUT/Editor/build_map.py.txt` à partir de `Assets/OUT/MapSource.png` : noir = solide, losanges verts = boîtes à objets, losanges blancs = caisses, losanges rouges = boost.
+    - L'avancée de chaque joueur est mesurée le long du circuit. La caméra suit le leader, et on est OUT si on sort de l'écran par n'importe quel bord.
+  - **Skins (personnages)** : Jordan (homme en costume de canard), Jamal (rappeur tout en noir, inspiré de la tenue d'une photo de référence, sans copier le visage d'une vraie personne), Mamie Turbo, Nitro (mannequin de crash-test).
+    - On change de perso avec gauche/droite dans la sélection.
+    - Chaque joueur garde sa couleur grâce au foulard et à l'écharpe.
 
 ## Contraintes fixes (consignes)
 - **Moteur : Unity 6000.0.40f1** (imposé, c'est la version de l'Anatidae Toolkit ; tout le groupe doit avoir la même), avec le module WebGL. Sortie WebGL en 1920×1080, sur la borne Anatidae.
