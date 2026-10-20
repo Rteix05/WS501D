@@ -54,6 +54,10 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control': 'no-store' });
     return res.end(png);
   }
+  if (url.pathname === '/manifest.json') {
+    res.writeHead(200, { 'Content-Type': 'application/manifest+json' });
+    return fs.createReadStream(path.join(DIR, 'public', 'manifest.json')).pipe(res);
+  }
   if (url.pathname === '/' || url.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     return fs.createReadStream(path.join(DIR, 'public', 'index.html')).pipe(res);
@@ -92,8 +96,13 @@ wss.on('connection', (ws, req) => {
   // Téléphone
   const code = (url.searchParams.get('r') || '').toUpperCase();
   const name = (url.searchParams.get('name') || '???').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 3) || '???';
-  const room = rooms.get(code);
-  if (!room) { send(ws, { t: 'error', msg: `Partie ${code || '?'} introuvable. Rescanne le QR code.` }); ws.close(); return; }
+  // Code absent ou périmé (ex. icône de l'écran d'accueil) : s'il n'y a qu'une partie ouverte, on la rejoint
+  let room = rooms.get(code);
+  if (!room && rooms.size === 1) room = [...rooms.values()][0];
+  if (!room) {
+    send(ws, { t: 'error', msg: rooms.size ? 'Plusieurs parties ouvertes : scanne le QR code de ton écran.' : 'Aucune partie ouverte : lance le jeu puis rescanne le QR code.' });
+    ws.close(); return;
+  }
 
   const id = nextId++;
   room.phones.set(id, ws);

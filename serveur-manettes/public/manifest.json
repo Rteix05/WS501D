@@ -1,0 +1,9 @@
+{
+  "name": "OUT! — Manette",
+  "short_name": "OUT!",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#FFE600",
+  "theme_color": "#FFE600"
+}

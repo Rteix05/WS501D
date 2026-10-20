@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#FFE600">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OUT!">
+<link rel="manifest" href="/manifest.json">
 <title>OUT! — Manette</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Archivo+Black&display=swap" rel="stylesheet">
@@ -12,8 +17,8 @@
     --yellow: #FFE600; --red: #E63946; --black: #111111; --white: #F5F5F5; --blue: #3A86FF;
     --me: #111111;
   }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; touch-action: none; }
-  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--yellow); color: var(--black); font-family: 'Archivo Black', system-ui, sans-serif; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none; }
+  html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--yellow); color: var(--black); font-family: 'Archivo Black', system-ui, sans-serif; }
   body {
     background-color: var(--yellow);
     background-image: radial-gradient(var(--red) 22%, transparent 24%);
@@ -21,7 +26,8 @@
     background-position: 0 0;
   }
   .bangers { font-family: 'Bangers', 'Impact', sans-serif; letter-spacing: .02em; }
-  .screen { position: fixed; inset: 0; display: none; }
+  .screen { position: fixed; left: 0; top: 0; width: 100vw; height: 100dvh; display: none;
+             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
   .screen.on { display: flex; }
 
   /* Cases BD */
@@ -39,24 +45,24 @@
   .btn:active { transform: translate(4px, 4px); box-shadow: 3px 3px 0 var(--black); }
   .err { color: var(--red); min-height: 1.2em; font-size: 14px; margin-top: 10px; }
 
-  /* Manette */
+  /* Manette : tout est proportionnel à la hauteur visible (100dvh), pour tenir sous la barre de Safari */
   #pad { flex-direction: column; }
-  #top { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
-  #tag { font-size: 34px; padding: 4px 14px 0; background: var(--me); color: var(--white); border: 4px solid var(--black); box-shadow: 5px 5px 0 var(--black); transform: rotate(-2deg); }
-  #status { font-size: 13px; background: var(--black); color: var(--yellow); padding: 6px 10px; }
+  #top { height: 15dvh; display: flex; align-items: center; justify-content: space-between; padding: 0 3vw; }
+  #tag { font-size: 7dvh; padding: .6dvh 2.4dvh 0; background: var(--me); color: var(--white); border: 3px solid var(--black); box-shadow: 4px 4px 0 var(--black); transform: rotate(-2deg); }
+  #status { font-size: 3.4dvh; background: var(--black); color: var(--yellow); padding: 1.4dvh 2dvh; max-width: 55vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #zones { flex: 1; display: flex; }
   #stickZone { flex: 1; position: relative; }
-  #stickHint { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 26px; opacity: .55; text-align: center; pointer-events: none; }
+  #stickHint { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 6dvh; opacity: .55; text-align: center; pointer-events: none; }
   #base, #knob { position: absolute; border-radius: 50%; pointer-events: none; display: none; }
-  #base { width: 150px; height: 150px; margin: -75px 0 0 -75px; border: 5px solid var(--black); background: rgba(245,245,245,.6); }
-  #knob { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: var(--me); border: 5px solid var(--black); box-shadow: 4px 4px 0 var(--black); }
+  #base { width: 34dvh; height: 34dvh; margin: -17dvh 0 0 -17dvh; border: 4px solid var(--black); background: rgba(245,245,245,.6); }
+  #knob { width: 16dvh; height: 16dvh; margin: -8dvh 0 0 -8dvh; background: var(--me); border: 4px solid var(--black); box-shadow: 3px 3px 0 var(--black); }
   #buttons { flex: 1; position: relative; }
-  .b { position: absolute; border-radius: 50%; border: 6px solid var(--black); box-shadow: 8px 8px 0 var(--black); display: flex; align-items: center; justify-content: center;
-       text-align: center; color: var(--white); -webkit-text-stroke: 1.5px var(--black); font-family: 'Bangers', Impact, sans-serif; line-height: .95; }
-  .b.down { transform: translate(5px, 5px); box-shadow: 3px 3px 0 var(--black); filter: brightness(1.15); }
-  #b1 { width: 150px; height: 150px; right: 28px; bottom: 26px; background: var(--red); font-size: 40px; }
-  #b2 { width: 120px; height: 120px; right: 196px; bottom: 34px; background: var(--black); color: var(--yellow); -webkit-text-stroke: 0; font-size: 30px; }
-  #b3 { width: 120px; height: 120px; right: 60px; bottom: 196px; background: var(--blue); font-size: 26px; }
+  .b { position: absolute; border-radius: 50%; border: 4px solid var(--black); box-shadow: 5px 5px 0 var(--black); display: flex; align-items: center; justify-content: center;
+       text-align: center; color: var(--white); -webkit-text-stroke: 1px var(--black); font-family: 'Bangers', Impact, sans-serif; line-height: .95; }
+  .b.down { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--black); filter: brightness(1.15); }
+  #b1 { width: 34dvh; height: 34dvh; right: 4vw; bottom: 5dvh; background: var(--red); font-size: 9dvh; }
+  #b2 { width: 26dvh; height: 26dvh; right: calc(4vw + 38dvh); bottom: 7dvh; background: var(--black); color: var(--yellow); -webkit-text-stroke: 0; font-size: 6.5dvh; }
+  #b3 { width: 26dvh; height: 26dvh; right: calc(4vw + 7dvh); bottom: 43dvh; background: var(--blue); font-size: 5.5dvh; }
 
   #rotate { align-items: center; justify-content: center; background: var(--yellow); z-index: 10; text-align: center; font-size: 44px; padding: 20px; }
   @media (orientation: portrait) { body.playing #rotate { display: flex; } }
@@ -76,6 +82,7 @@
     <input id="name" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC">
     <button id="go" class="btn">JE JOUE !</button>
     <div id="joinErr" class="err"></div>
+    <p id="iosTip" style="display:none; font-size:12px; margin:12px 0 0">iPhone : pour jouer en plein écran, touche <b>Partager</b> puis <b>Sur l'écran d'accueil</b>, et lance OUT! depuis l'icône.</p>
   </div>
 </section>
 
@@ -100,6 +107,19 @@
 
 <script>
 const $ = s => document.querySelector(s);
+
+// Safari iOS ignore user-scalable=no : on bloque nous-mêmes le zoom (pincement, double-tap) et le défilement
+['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
+document.addEventListener('touchmove', e => { if (e.touches.length > 1 || e.target.id !== 'name') e.preventDefault(); }, { passive: false });
+let lastTouchEnd = 0;
+document.addEventListener('touchend', e => {
+  const now = Date.now();
+  if (now - lastTouchEnd < 350 && e.target.id !== 'name' && !e.target.closest('.btn')) e.preventDefault();
+  lastTouchEnd = now;
+}, { passive: false });
+document.addEventListener('selectstart', e => { if (e.target.id !== 'name') e.preventDefault(); });
+const standalone = window.navigator.standalone || matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches;
+if (/iPhone|iPod/.test(navigator.userAgent) && !standalone) document.getElementById('iosTip').style.display = 'block';
 const room = new URLSearchParams(location.search).get('r') || '';
 let ws = null, state = { x: 0, y: 0, b: 0 }, sent = '', lastSend = 0;
 
@@ -107,7 +127,7 @@ let ws = null, state = { x: 0, y: 0, b: 0 }, sent = '', lastSend = 0;
 try { $('#name').value = localStorage.getItem('out-name') || ''; } catch {}
 $('#name').addEventListener('input', e => e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 3));
 $('#go').addEventListener('click', start);
-if (!room) $('#joinErr').textContent = 'Pas de code de partie : scanne le QR code affiché sur l\'écran du jeu.';
+// sans code (ex. lancé depuis l'icône de l'écran d'accueil), le serveur rejoint la partie ouverte
 
 function start() {
   const name = ($('#name').value || '').padEnd(3, '_');
