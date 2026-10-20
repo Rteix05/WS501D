@@ -15,7 +15,7 @@ npm start          # port 8080 (ou PORT=xxxx npm start)
 
 ## La manette
 - **À gauche :** un joystick qui apparaît là où on pose le pouce. Bas = glissade.
-- **À droite :** SAUT (B1), GRAPPIN (B2, à maintenir), BOOST / OBJET (B3).
+- **À droite :** SAUT (B1), GRAPPIN (B2, à maintenir), BOOST / OBJET (B3), GLISSE (à maintenir, comme le joystick vers le bas).
 - Le téléphone vibre quand on rejoint, quand on prend un coup, quand on est éliminé (« OUT! ») et quand on gagne.
 
 ## Fonctionnement
@@ -28,7 +28,7 @@ npm start          # port 8080 (ou PORT=xxxx npm start)
 | serveur → jeu | `{t:"room", code, url}`, `{t:"join", id, name}`, `{t:"in", id, x, y, b}`, `{t:"leave", id}` |
 | jeu → téléphone (via le serveur) | `{t:"slot", id, player, color, text}`, `{t:"buzz", id, ms, text}` |
 
-- `b` est un masque de bits : 1 = B1, 2 = B2, 4 = B3. `x` et `y` vont de -1 à 1 (haut = positif), avec une zone morte de 20 %.
+- `b` est un masque de bits : 1 = B1, 2 = B2, 4 = B3, 8 = glissade. `x` et `y` vont de -1 à 1 (haut = positif), avec une zone morte de 20 %.
 - `PUBLIC_URL=https://…` force l'adresse mise dans le QR code, par exemple quand le serveur tournera sur le site du jeu.
 
 Côté Unity, le code se trouve dans `Assets/OUT/Scripts/OutPhones.cs` et `Assets/Plugin/OutPhones.jslib`.
