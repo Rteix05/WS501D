@@ -25,8 +25,11 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
     - B3 : boost ou objet ;
     - bas : glissade.
   - Touches clavier : J1 = ZQSD + F G H, J2 = flèches + pavé 1 2 3, Échap = bouton blanc.
-  - **Circuit** : c'est une reprise exacte de la page « Map » du Figma, une capture d'un circuit SpeedRunners en boucle qui tourne dans le sens horaire, avec notre style B4.
-    - Les données sont générées par `Assets/OUT/Editor/build_map.py.txt` à partir de `Assets/OUT/MapSource.png` : noir = solide, losanges verts = boîtes à objets, losanges blancs = caisses, losanges rouges = boost.
+  - **Circuit (carte V3, 21/10/2026)** : grande boucle dans le sens horaire, environ 2 à 3 fois plus longue que la V1, à plusieurs chemins (maquette « Map V3 » sur la page Map du Figma).
+    - Chemins : deux voies en haut (toit / couverte), une chute à droite, un raccourci au milieu fermé par une porte, deux voies en bas, un escalier à lanceurs et un tube de propulsion à gauche.
+    - Mécanismes : lanceurs, anneaux du tube, boosts au sol, portes rayées jaune et noir ouvertes quelques secondes par un levier (2 trappes qui font tomber les suivants, 1 porte de raccourci).
+    - La carte est décrite par `Assets/OUT/Editor/gen_map3.py.txt` (masque + marqueurs), convertie par `build_map.py.txt`. Le code des mécanismes est dans `Assets/OUT/Scripts/OutMechanisms.cs`.
+    - L'ancienne carte V1 (capture SpeedRunners du Figma) est gardée dans `Assets/OUT/MapV1/`.
     - L'avancée de chaque joueur est mesurée le long du circuit. La caméra suit le leader, et on est OUT si on sort de l'écran par n'importe quel bord.
   - **Skins (personnages)** : Jordan (homme en costume de canard), Jamal (rappeur tout en noir, inspiré de la tenue d'une photo de référence, sans copier le visage d'une vraie personne), Mamie Turbo, Nitro (mannequin de crash-test).
     - On change de perso avec gauche/droite dans la sélection.
