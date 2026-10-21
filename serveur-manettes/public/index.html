@@ -110,15 +110,11 @@
 <script>
 const $ = s => document.querySelector(s);
 
-// Safari iOS ignore user-scalable=no : on bloque nous-mêmes le zoom (pincement, double-tap) et le défilement
+// Safari iOS ignore user-scalable=no : on bloque nous-mêmes le zoom (pincement) et le défilement.
+// Le double-tap est bloqué par le preventDefault du touchstart de la manette (plus bas) : surtout pas sur touchend,
+// sinon iOS peut « perdre » le relâchement d'un bouton et l'appui suivant ne compte plus.
 ['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
 document.addEventListener('touchmove', e => { if (e.touches.length > 1 || e.target.id !== 'name') e.preventDefault(); }, { passive: false });
-let lastTouchEnd = 0;
-document.addEventListener('touchend', e => {
-  const now = Date.now();
-  if (now - lastTouchEnd < 350 && e.target.id !== 'name' && !e.target.closest('.btn')) e.preventDefault();
-  lastTouchEnd = now;
-}, { passive: false });
 document.addEventListener('selectstart', e => { if (e.target.id !== 'name') e.preventDefault(); });
 const standalone = window.navigator.standalone || matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches;
 if (/iPhone|iPod/.test(navigator.userAgent) && !standalone) document.getElementById('iosTip').style.display = 'block';
@@ -183,35 +179,44 @@ function flash(text) {
   setTimeout(() => $('#flash').classList.remove('on'), 900);
 }
 
-// ---------- Boutons ----------
-document.querySelectorAll('.b').forEach(btn => {
-  const bit = +btn.dataset.bit;
-  const down = e => { e.preventDefault(); btn.setPointerCapture?.(e.pointerId); btn.classList.add('down'); state.b |= bit; push(true); };
-  const up = e => { e.preventDefault(); btn.classList.remove('down'); state.b &= ~bit; push(true); };
-  btn.addEventListener('pointerdown', down);
-  btn.addEventListener('pointerup', up);
-  btn.addEventListener('pointercancel', up);
-  btn.addEventListener('lostpointercapture', up);
-});
-
-// ---------- Joystick flottant ----------
-const zone = $('#stickZone'), base = $('#base'), knob = $('#knob');
+// ---------- Commandes tactiles ----------
+// Chaque doigt est suivi séparément (identifiant du touch) : un doigt sur le joystick, un ou plusieurs sur les boutons.
+// Sur téléphone on utilise les événements tactiles natifs (plus fiables que les « pointer events » sur iOS),
+// la souris (test sur PC) passe par les pointer events.
+const pad = $('#pad'), zone = $('#stickZone'), base = $('#base'), knob = $('#knob');
+const buttons = [...document.querySelectorAll('.b')];
+const pressed = new Map();      // identifiant du doigt → bit du bouton
 let stickId = null, cx = 0, cy = 0;
 const R = 60;
-zone.addEventListener('pointerdown', e => {
-  if (stickId !== null) return;
-  stickId = e.pointerId; zone.setPointerCapture?.(e.pointerId);
+
+function bitAt(x, y) {
+  const el = document.elementFromPoint(x, y);
+  const b = el && el.closest('.b');
+  return b ? +b.dataset.bit : 0;
+}
+
+function refreshButtons() {
+  let b = 0;
+  for (const bit of pressed.values()) b |= bit;
+  if (b === state.b) return;
+  state.b = b;
+  buttons.forEach(el => el.classList.toggle('down', (b & +el.dataset.bit) !== 0));
+  push(true);
+}
+
+function stickStart(id, x, y) {
+  stickId = id;
   const r = zone.getBoundingClientRect();
-  cx = e.clientX - r.left; cy = e.clientY - r.top;
+  cx = x - r.left; cy = y - r.top;
   base.style.left = knob.style.left = cx + 'px';
   base.style.top = knob.style.top = cy + 'px';
   base.style.display = knob.style.display = 'block';
   $('#stickHint').style.display = 'none';
-});
-zone.addEventListener('pointermove', e => {
-  if (e.pointerId !== stickId) return;
+}
+
+function stickMove(x, y) {
   const r = zone.getBoundingClientRect();
-  let dx = e.clientX - r.left - cx, dy = e.clientY - r.top - cy;
+  let dx = x - r.left - cx, dy = y - r.top - cy;
   const d = Math.hypot(dx, dy);
   if (d > R) { dx *= R / d; dy *= R / d; }
   knob.style.left = cx + dx + 'px'; knob.style.top = cy + dy + 'px';
@@ -220,15 +225,54 @@ zone.addEventListener('pointermove', e => {
   state.x = Math.abs(nx) < .2 ? 0 : +nx.toFixed(2);
   state.y = Math.abs(ny) < .2 ? 0 : +ny.toFixed(2);
   push(false);
-});
-const release = e => {
-  if (e.pointerId !== stickId) return;
+}
+
+function stickEnd() {
   stickId = null; state.x = state.y = 0;
   base.style.display = knob.style.display = 'none';
   push(true);
-};
-zone.addEventListener('pointerup', release);
-zone.addEventListener('pointercancel', release);
+}
+
+function pointerStart(id, x, y, target) {
+  if (zone.contains(target)) { if (stickId === null) stickStart(id, x, y); return; }
+  const bit = bitAt(x, y);
+  if (bit) { pressed.set(id, bit); navigator.vibrate?.(8); refreshButtons(); }
+}
+
+function pointerMove(id, x, y) {
+  if (id === stickId) { stickMove(x, y); return; }
+  // on peut glisser le doigt d'un bouton à l'autre ; en sortant d'un bouton, on le garde appuyé (plus tolérant)
+  if (pressed.has(id)) { const bit = bitAt(x, y); if (bit && bit !== pressed.get(id)) { pressed.set(id, bit); refreshButtons(); } }
+}
+
+function pointerEnd(id) {
+  if (id === stickId) stickEnd();
+  if (pressed.delete(id)) refreshButtons();
+}
+
+if ('ontouchstart' in window) {
+  pad.addEventListener('touchstart', e => {
+    e.preventDefault();   // pas de zoom au double-tap, pas de clic simulé
+    for (const t of e.changedTouches) pointerStart(t.identifier, t.clientX, t.clientY, t.target);
+  }, { passive: false });
+  pad.addEventListener('touchmove', e => {
+    e.preventDefault();
+    for (const t of e.changedTouches) pointerMove(t.identifier, t.clientX, t.clientY);
+  }, { passive: false });
+  const end = e => { for (const t of e.changedTouches) pointerEnd(t.identifier); };
+  pad.addEventListener('touchend', end);
+  pad.addEventListener('touchcancel', end);
+} else {
+  pad.addEventListener('pointerdown', e => { pad.setPointerCapture?.(e.pointerId); pointerStart(e.pointerId, e.clientX, e.clientY, e.target); });
+  pad.addEventListener('pointermove', e => pointerMove(e.pointerId, e.clientX, e.clientY));
+  pad.addEventListener('pointerup', e => pointerEnd(e.pointerId));
+  pad.addEventListener('pointercancel', e => pointerEnd(e.pointerId));
+}
+
+// Sécurité : si la page passe en arrière-plan (notification, appel…), on relâche tout
+function releaseAll() { pressed.clear(); if (stickId !== null) stickEnd(); refreshButtons(); }
+document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
+window.addEventListener('blur', releaseAll);
 
 // ---------- Envoi (immédiat pour les boutons, max 30 fois/s pour le joystick) ----------
 function push(now) {
