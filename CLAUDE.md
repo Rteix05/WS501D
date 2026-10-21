@@ -25,13 +25,17 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
     - B3 : boost ou objet ;
     - bas : glissade.
   - Touches clavier : J1 = ZQSD + F G H, J2 = flèches + pavé 1 2 3, Échap = bouton blanc.
-  - **Circuit (carte V4 « Le Circuit Fluide », 21/10/2026)** : maquette « Map V4 » sur la page Map du Figma, d'après la proposition de refonte de l'équipe.
+  - **Circuit (carte V5, 21/10/2026)** : c'est la V4 « Le Circuit Fluide » agrandie ×1,6, avec des couloirs plus hauts et plus longs pour voir le fond (maquette « Map V5 » sur la page Map du Figma). Un tour fait environ 8 400 px.
+    - Haies, trous, passages bas et levier gardent leur taille. Pour aller avec, la caméra est plus large (vue de 34 u de haut au lieu de 22) et le grappin plus long (32 u).
+    - Le tremplin et le bloc double saut (ajouté par l'équipe) sont recalculés par simulation dans `Assets/OUT/Editor/gen_map5.py.txt`.
+    - Fond prévu : désert au coucher du soleil (maquette sur la page Map), pas encore validé ni intégré.
+    - Tracé de la V4, d'après la proposition de refonte de l'équipe :
     - Parcours : départ en haut à droite et pente prononcée, puis la rue du toit vers la gauche (dash avec petits trous qui font tomber dans la voie du dessous). Ensuite, un toboggan à 45° garni de boosts et un tremplin vers une zone de grappin.
     - Au milieu, deux options : A = raccourci risqué fermé par une porte, avec un levier suspendu qu'il faut attraper en sautant ; B = chemin long avec boîtes « ? » et losanges.
     - En bas : saut obligatoire au-dessus d'un vide juste avant le damier, puis un tube de propulsion remonte au départ.
     - La ligne de départ (dans le tube) ferme le tour. Le contre-la-montre s'arrête au damier.
     - Mécanismes (`Assets/OUT/Scripts/OutMechanisms.cs`) : lanceurs et tremplin, anneaux du tube, boosts au sol (aussi en pente), portes rayées jaune et noir ouvertes quelques secondes par un levier.
-    - La carte est décrite par `Assets/OUT/Editor/gen_map4.py.txt`, convertie par `build_map.py.txt`. Les cartes V1 et V3 sont gardées dans `Assets/OUT/MapV1/` et `MapV3/`.
+    - La carte est décrite par `Assets/OUT/Editor/gen_map4.py.txt`, convertie par `build_map.py.txt`. Les cartes V1, V3 et V4 sont gardées dans `Assets/OUT/MapV1/`, `MapV3/` et `MapV4/`.
     - L'avancée de chaque joueur est mesurée le long du circuit. La caméra suit le leader, et on est OUT si on sort de l'écran par n'importe quel bord.
   - **Skins (personnages)** : Jordan (homme en costume de canard), Jamal (rappeur tout en noir, inspiré de la tenue d'une photo de référence, sans copier le visage d'une vraie personne), Mamie Turbo, Nitro (mannequin de crash-test).
     - On change de perso avec gauche/droite dans la sélection.
