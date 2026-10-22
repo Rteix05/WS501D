@@ -25,9 +25,14 @@ Projet de groupe d'étudiants MMI : un **jeu d'arcade sous Unity** (web + borne 
     - B3 : boost ou objet ;
     - bas : glissade.
   - Touches clavier : J1 = ZQSD + F G H, J2 = flèches + pavé 1 2 3, Échap = bouton blanc.
-  - **Circuit (carte V5, 21/10/2026)** : c'est la V4 « Le Circuit Fluide » agrandie ×1,6, avec des couloirs plus hauts et plus longs pour voir le fond (maquette « Map V5 » sur la page Map du Figma). Un tour fait environ 8 400 px.
-    - Haies, trous, passages bas et levier gardent leur taille. Pour aller avec, la caméra est plus large (vue de 34 u de haut au lieu de 22) et le grappin plus long (32 u).
-    - Le tremplin et le bloc double saut (ajouté par l'équipe) sont recalculés par simulation dans `Assets/OUT/Editor/gen_map5.py.txt`.
+  - **Circuit (carte V6, 22/10/2026)** : nouveau tracé, plus grand et plus « SpeedRunners » (maquettes « Map V6 » sur la page Map du Figma). Un tour fait environ 13 500 px.
+    - Les toits : terrain qui ondule, haies, passage bas, petit trou et gouffre à grappin. On tombe dans les galeries du dessous, plus lentes, qui remontent par un lanceur.
+    - La cascade : 4 rampes en zigzag dans une grande salle ouverte.
+    - Le bas : chemin haut risqué (trou à sauter en bout de rampe, porte + levier suspendu) ou chemin bas plus long (creux, obstacles, boîtes « ? »).
+    - Le canyon : gouffre avec une poutre suspendue. Tomber dedans renvoie de l'autre côté par un lanceur.
+    - La fin : ligne droite avec saut final avant le damier, puis le tube à anneaux remonte au départ.
+    - Les bots suivent leur propre guide (`Resources/OutMapBotField.bytes`), sans le chemin haut.
+    - Carte décrite par `Assets/OUT/Editor/gen_map6.py.txt` (champ d'avancée en cases de 3 px). Les cartes V1 à V5 sont gardées dans `Assets/OUT/MapV1/` … `MapV5/`.
     - Fond : désert au coucher du soleil, validé et intégré le 21/10/2026 (`OutDesert.cs`, données `Resources/OutDesert.json` exportées par `Editor/export_desert.py.txt`). Il est fait de 5 couches en parallaxe, avec le même dessin que la maquette de la page Map.
     - Tracé de la V4, d'après la proposition de refonte de l'équipe :
     - Parcours : départ en haut à droite et pente prononcée, puis la rue du toit vers la gauche (dash avec petits trous qui font tomber dans la voie du dessous). Ensuite, un toboggan à 45° garni de boosts et un tremplin vers une zone de grappin.
